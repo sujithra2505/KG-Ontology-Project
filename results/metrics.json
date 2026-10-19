@@ -1,0 +1,41 @@
+{
+  "training_edges": 272115,
+  "validation_edges": 17535,
+  "test_edges": 20466,
+  "predicted_unique_edges": 760370,
+  "predicted_edges_not_in_training": 760370,
+  "validation": {
+    "known_edges": 17535,
+    "predicted_edges_found": 6388,
+    "precision": 0.00840117311308968,
+    "recall": 0.3642999714856002
+  },
+  "test": {
+    "known_edges": 20466,
+    "predicted_edges_found": 7335,
+    "precision": 0.009646619408971949,
+    "recall": 0.35839929639401935
+  },
+  "note": "Validation/test matches are observed held-out positives. Non-matches are unknown, not confirmed false facts.",
+  "graph_nodes": 14505,
+  "graph_edges": 272115,
+  "ontology_triples": 423226,
+  "learned_rules": 2384,
+  "mining": {
+    "two_hop_body_patterns": 6054,
+    "rules_before_limit": 2384,
+    "skipped_high_degree_pivots": 138,
+    "skipped_two_hop_paths": 18055501
+  },
+  "prediction": {
+    "skipped_high_degree_pivots": 138,
+    "skipped_two_hop_paths": 18055501
+  },
+  "parameters": {
+    "min_support": 2,
+    "min_confidence": 0.1,
+    "max_rules": 3000,
+    "max_paths_per_pivot": 10000
+  },
+  "prediction_explorer": "results/prediction_explorer.html"
+}
