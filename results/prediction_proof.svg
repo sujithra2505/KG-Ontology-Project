@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" viewBox="0 0 1400 980" preserveAspectRatio="xMidYMid meet">
+<defs>
+  <marker id="arrow-observed" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#16803c"/>
+  </marker>
+  <marker id="arrow-predicted" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#d97706"/>
+  </marker>
+</defs>
+<rect width="1400" height="980" fill="#f8fafc"/>
+<text x="700" y="48" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" font-weight="700" fill="#0f172a">Predicted edge and its supporting facts</text>
+<text x="700" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#475569">Apply the two-hop rule to the two observed green edges.</text>
+<path d="M245,400 Q700,130 1155,400" fill="none" stroke="#d97706" stroke-width="5" stroke-dasharray="13 9" marker-end="url(#arrow-predicted)"/>
+<rect x="490" y="126" width="420" height="68" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+<text x="700" y="153" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#9a3412">PREDICTED EDGE — MATCHES VALIDATION DATA</text>
+<text x="700" y="178" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#7c2d12">confidence 0.952 · rule support 20</text>
+<line x1="270" y1="460" x2="620" y2="460" stroke="#16803c" stroke-width="5" marker-end="url(#arrow-observed)"/>
+<line x1="780" y1="460" x2="1130" y2="460" stroke="#16803c" stroke-width="5" marker-end="url(#arrow-observed)"/>
+<rect x="220" y="404" width="450" height="57" rx="8" fill="#ffffff" stroke="#cbd5e1"/><text x="445" y="411" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#334155"><tspan font-weight="700">r1: </tspan><tspan x="445" dy="0">base/schemastaging/organization_extra</tspan><tspan x="445" dy="15">/phone_number./base/schemastaging/phone_sandbox</tspan><tspan x="445" dy="15">/service_location</tspan></text>
+<rect x="730" y="404" width="450" height="38" rx="8" fill="#ffffff" stroke="#cbd5e1"/><text x="955" y="425" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#334155"><tspan font-weight="700">r2: </tspan><tspan x="955" dy="0">common/topic/webpage./common/webpage/category</tspan></text>
+<circle cx="190" cy="460" r="78" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<circle cx="700" cy="460" r="78" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+<circle cx="1210" cy="460" r="78" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+<text x="190" y="451" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#0f172a">HEAD</text>
+<text x="190" y="477" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#334155">/m/0226k3</text>
+<text x="700" y="451" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#0f172a">MIDDLE</text>
+<text x="700" y="477" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#334155">/m/025r_t</text>
+<text x="1210" y="451" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#0f172a">TAIL</text>
+<text x="1210" y="477" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#334155">/m/08mbj5d</text>
+<text x="700" y="585" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#166534">Observed supporting training facts</text>
+<text x="700" y="617" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#166534"><tspan x="700" dy="0">1. /m/0226k3 --/base/schemastaging/organization_extra/phone_number./base/schemastaging/phone_sandbox</tspan><tspan x="700" dy="19">/service_location--&gt; /m/025r_t</tspan></text>
+<text x="700" y="660" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#166534"><tspan x="700" dy="0">2. /m/025r_t --/common/topic/webpage./common/webpage/category--&gt; /m/08mbj5d</tspan></text>
+<text x="700" y="724" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#9a3412">Rule applied</text>
+<text x="700" y="754" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#9a3412"><tspan x="700" dy="0">r1(X,Y) AND r2(Y,Z) =&gt; r3(X,Z)</tspan></text>
+<text x="700" y="786" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#475569"><tspan x="700" dy="0">r1 = /base/schemastaging/organization_extra/phone_number./base/schemastaging/phone_sandbox/service_location</tspan></text>
+<text x="700" y="818" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#475569"><tspan x="700" dy="0">r2 = /common/topic/webpage./common/webpage/category</tspan></text>
+<text x="700" y="850" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#475569"><tspan x="700" dy="0">r3 = /common/topic/webpage./common/webpage/category</tspan></text>
+<text x="700" y="906" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#9a3412">Dashed orange edge matches a held-out VALIDATION triple; solid green edges are training facts.</text>
+</svg>
