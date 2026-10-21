@@ -29,6 +29,18 @@ assertions, learn rules, and generate predictions. It writes:
   edges. Search/filter the candidate list, including validation/test matches,
   and select any prediction to display its two observed supporting training
   edges and applicable rule paths.
+- `results\evaluation_dashboard.html` — test-set precision/recall, category
+  overlap checks, and searchable/paginated lists of recovered and missed test
+  triples. Generate it from existing files without retraining:
+
+  ```powershell
+  python modules\evaluation_dashboard.py
+  ```
+
+Open `results\evaluation_dashboard.html` in a browser to inspect the
+calculations and test-triplet tables. It checks the saved `metrics.json`
+against freshly counted existing dataset/prediction files and fails clearly
+if they disagree; it does not retrain or regenerate predictions.
 - `results\prediction_example.svg` — a visual explanation of one prediction
   that matches held-out data, showing its two training-edge supports and the
   independently observed predicted edge.

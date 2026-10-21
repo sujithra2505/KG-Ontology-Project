@@ -1,3 +1,6 @@
+import csv
+import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,6 +10,7 @@ from rdflib import OWL, RDF, RDFS
 from modules.kg_pipeline import (
     build_knowledge_graph,
     build_ontology,
+    _evaluate_predictions,
     learn_path_rules,
     predict_missing_edges,
     read_triples,
@@ -14,6 +18,7 @@ from modules.kg_pipeline import (
 )
 from modules.kg_viewer import write_full_graph_viewer
 from modules.prediction_viewer import write_prediction_explorer
+from modules.evaluation_dashboard import build_dashboard
 
 
 class KnowledgeGraphPipelineTests(unittest.TestCase):
@@ -135,6 +140,68 @@ class KnowledgeGraphPipelineTests(unittest.TestCase):
         self.assertIn("No held-out match", html)
         self.assertIn("const DATA=", html)
         self.assertIn('"carol"', html)
+
+    def test_evaluation_dashboard_uses_existing_files_and_checks_counts(self):
+        train = [("train_head", "train_relation", "train_tail")]
+        validation = [("valid_head", "valid_relation", "valid_tail")]
+        test = [
+            ("found_head", "found_relation", "found_tail"),
+            ("missed_head", "missed_relation", "missed_tail"),
+        ]
+        predictions = {
+            test[0]: (0.8, 4),
+            ("unknown_head", "unknown_relation", "unknown_tail"): (0.5, 2),
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "dataset").mkdir()
+            (root / "results").mkdir()
+            for name, triples in (
+                ("train.txt", train),
+                ("valid.txt", validation),
+                ("test.txt", test),
+            ):
+                with (root / "dataset" / name).open(
+                    "w", encoding="utf-8", newline=""
+                ) as stream:
+                    csv.writer(stream, delimiter="\t").writerows(triples)
+            with (root / "results" / "predicted_edges.tsv").open(
+                "w", encoding="utf-8", newline=""
+            ) as stream:
+                writer = csv.writer(stream, delimiter="\t")
+                writer.writerow(
+                    ["head", "relation", "tail", "confidence", "rule_support"]
+                )
+                for triple, (confidence, support) in predictions.items():
+                    writer.writerow([*triple, confidence, support])
+            metrics = _evaluate_predictions(
+                predictions, set(train), set(validation), set(test)
+            )
+            (root / "results" / "metrics.json").write_text(
+                json.dumps(metrics), encoding="utf-8"
+            )
+            data = build_dashboard(root)
+            document = (
+                root / "results" / "evaluation_dashboard.html"
+            ).read_text(encoding="utf-8")
+
+        self.assertEqual(data["candidate_categories"]["test"], 1)
+        self.assertEqual(data["candidate_categories"]["none"], 1)
+        self.assertEqual(data["evaluation"]["test_triplets_not_predicted"], 1)
+        self.assertEqual(data["candidate_category_overlaps"]["validation_test"], 0)
+        self.assertEqual(data["statistics"]["entities"], 8)
+        self.assertEqual(data["statistics"]["distinct_relationship_types"], 4)
+        self.assertEqual(data["statistics"]["total_original_triplets"], 4)
+        self.assertAlmostEqual(data["evaluation"]["f1"], 0.5)
+        self.assertEqual(len(data["relationship_metrics"]), 2)
+        self.assertIn("missed_head", document)
+        self.assertIn("test_triplets_not_predicted", document)
+        self.assertIn("Relationship-wise test performance", document)
+        self.assertIn("Accuracy", document)
+        html_ids = set(re.findall(r'\bid="([^"]+)"', document))
+        script = re.findall(r"<script>([\s\S]*?)</script>", document)[-1]
+        script_ids = set(re.findall(r'querySelector\("#([^"]+)"\)', script))
+        self.assertFalse(script_ids - html_ids)
 
 
 if __name__ == "__main__":
