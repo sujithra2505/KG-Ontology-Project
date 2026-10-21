@@ -1,0 +1,2 @@
+results/**/*.csv -text
+results/**/*.json -text

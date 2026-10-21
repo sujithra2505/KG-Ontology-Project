@@ -1,0 +1,88 @@
+{
+  "run_timestamp_utc": "20261021T081816544994Z",
+  "dataset_files_used": [
+    "dataset/train.txt",
+    "dataset/valid.txt"
+  ],
+  "test_split_used": false,
+  "parameters": {
+    "min_support": 2,
+    "min_confidence": 0.2,
+    "max_rules": 3000,
+    "max_paths_per_pivot": 10000
+  },
+  "learned_rules": 1777,
+  "mining": {
+    "two_hop_body_patterns": 6054,
+    "rules_before_limit": 1777,
+    "skipped_high_degree_pivots": 138,
+    "skipped_two_hop_paths": 18055501
+  },
+  "prediction": {
+    "skipped_high_degree_pivots": 138,
+    "skipped_two_hop_paths": 18055501,
+    "unique_candidate_edges": 512886,
+    "unique_candidate_rule_evidence": 832569
+  },
+  "scoring_methods": {
+    "baseline": {
+      "name": "maximum supporting-rule confidence",
+      "description": "Maximum confidence of any learned rule supporting a candidate; preserves the current baseline scoring.",
+      "validation": {
+        "known_edges": 17535,
+        "predicted_edges_found": 5391,
+        "precision": 0.010511107731542683,
+        "recall": 0.30744225834046196
+      }
+    },
+    "experimental": {
+      "name": "noisy-OR over distinct supporting rules",
+      "description": "For each candidate, combine one confidence per unique (body relation 1, body relation 2, target relation) rule as 1 - product(1 - confidence). Repeated paths for the same rule are stored once.",
+      "assumption": "Distinct rule evidence is treated as independent for scoring; related rules can violate this assumption.",
+      "validation": {
+        "known_edges": 17535,
+        "predicted_edges_found": 5391,
+        "precision": 0.010511107731542683,
+        "recall": 0.30744225834046196
+      }
+    }
+  },
+  "score_statistics": {
+    "baseline_max_rule_confidence": {
+      "minimum": 0.2,
+      "mean": 0.3692923641943904,
+      "maximum": 0.9545454545454546
+    },
+    "distinct_rule_noisy_or": {
+      "minimum": 0.19999999999999996,
+      "mean": 0.45780297122269065,
+      "maximum": 0.9999999963381102
+    },
+    "candidates_with_multiple_distinct_rules": 199595
+  },
+  "score_comparison": {
+    "unique_candidates_with_score": 512886,
+    "candidates_with_changed_score": 199595,
+    "mean_score_delta_from_baseline": 0.0885106070282887
+  },
+  "candidate_coverage_unchanged": true,
+  "ranked_metric_status": "No ranking improvement is claimed. The current candidate universe is an incomplete, rule-generated subset and is not a defined filtered full-ranking protocol.",
+  "recommended_future_ranking_protocol": {
+    "candidate_universe": "For each validation query, rank all entity replacements for head and tail from the training entity universe, evaluating head and tail queries separately and averaged.",
+    "filtered_evaluation": "Filter other known true completions from train, validation, and test, then restore the target triple. Test labels must not be accessed during tuning.",
+    "tie_handling": "Use average rank for equal scores; compute reciprocal rank from that rank and Hits@K from rank <= K.",
+    "sampling": "Prefer full entity ranking; if resource limits require sampling, record candidate count, seed, and sampling method and label the result sampled."
+  },
+  "runtime_seconds": 12164.6236754,
+  "memory": {
+    "baseline_rss_bytes": 136294400,
+    "peak_sampled_rss_bytes": 286842880,
+    "peak_sampled_rss_delta_bytes": 150548480,
+    "sampling_interval_seconds": 0.05
+  },
+  "candidate_database": "scoring.sqlite",
+  "candidate_database_bytes": 366456832,
+  "commands": [
+    "py -3.13 modules\\kg_scoring_experiment.py"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "min_support": 2,
+    "min_confidence": 0.1,
+    "max_rules": 3000,
+    "max_paths_per_pivot": 5000
+  },
+  "training_edges": 272115,
+  "validation_edges": 17535,
+  "learned_rules": 2336,
+  "mining": {
+    "two_hop_body_patterns": 5922,
+    "rules_before_limit": 2336,
+    "skipped_high_degree_pivots": 261,
+    "skipped_two_hop_paths": 18906709
+  },
+  "prediction": {
+    "skipped_high_degree_pivots": 261,
+    "skipped_two_hop_paths": 18906709,
+    "unique_candidate_edges": 666052
+  },
+  "validation": {
+    "known_edges": 17535,
+    "predicted_edges_found": 5934,
+    "precision": 0.008909214295580526,
+    "recall": 0.3384088964927288
+  },
+  "runtime_seconds": {
+    "rule_learning": 7.81175230000008,
+    "candidate_generation_and_disk_deduplication": 32.62227780000012,
+    "total": 41.03679319999992
+  },
+  "memory": {
+    "baseline_rss_bytes": 136552448,
+    "peak_sampled_rss_bytes": 271310848,
+    "peak_sampled_rss_delta_bytes": 134758400,
+    "sampling_interval_seconds": 0.05
+  },
+  "candidate_database": "candidates.sqlite",
+  "candidate_database_bytes": 69365760,
+  "evaluation_definition": {
+    "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+    "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+    "unmatched_candidates": "unknown truth; not treated as false"
+  },
+  "configuration_id": "cap_5000"
+}

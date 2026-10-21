@@ -1,0 +1,428 @@
+{
+  "schema_version": 1,
+  "experiment_type": "validation_rule_tuning",
+  "run_timestamp_utc": "20261021T080249887658Z",
+  "manifest_created_at_utc": "2026-10-21T12:22:24.704712+00:00",
+  "provenance_kind": "retrospective_from_saved_outputs",
+  "datasets": {
+    "identity_timing": "at_manifest_creation",
+    "splits": {
+      "train": {
+        "path": "dataset/train.txt",
+        "sha256": "6e4c2782169af21e9743f3b1d200886f5d595bf6bc504ec1351720949c5cdfae",
+        "size_bytes": 21277292,
+        "used_for_learning": true,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "valid": {
+        "path": "dataset/valid.txt",
+        "sha256": "cf6309010852f6a8d47a45df830a426415d1ee6f7a3970a8376ff1fb81db4a5c",
+        "size_bytes": 1303101,
+        "used_for_learning": false,
+        "used_for_evaluation": true,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "test": {
+        "path": "dataset/test.txt",
+        "sha256": "5711cf41623ceb4eacc50eb6108a3ca6565c7492e3caaf82a3e355cc660d1574",
+        "size_bytes": 1519499,
+        "used_for_learning": false,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      }
+    }
+  },
+  "code_version": {
+    "git_commit_observed_at_manifest_creation": "8534a405701fc7e5dff900eb766c3bc99e0a82bf",
+    "working_tree_dirty_at_manifest_creation": true,
+    "execution_version_verified": false,
+    "source_files_hashed_at_execution": [],
+    "historical_execution_version_note": "Execution-time commit, worktree state, and source hashes were not recorded; the current commit is not asserted as the version used by this historical run."
+  },
+  "configured": {
+    "rule_settings": {
+      "support_sweep": {
+        "confidence_fixed": 0.1,
+        "values": [
+          1,
+          2,
+          4
+        ]
+      },
+      "confidence_sweep": {
+        "support_fixed": 2,
+        "values": [
+          0.05,
+          0.1,
+          0.2
+        ]
+      },
+      "max_rules": 3000,
+      "max_paths_per_pivot": 10000
+    },
+    "candidate_generation": {
+      "candidate_generation_parameters_vary_by_configuration": true,
+      "configuration_ids": [
+        "support_1_confidence_0p1",
+        "support_2_confidence_0p1",
+        "support_4_confidence_0p1",
+        "support_2_confidence_0p05",
+        "support_2_confidence_0p2"
+      ]
+    },
+    "scoring": {
+      "method": "not scored; candidate membership only"
+    }
+  },
+  "measured": {
+    "metrics": {
+      "baseline": {
+        "candidate_count": 760370,
+        "learned_rules": 2384,
+        "validation": {
+          "known_edges": 17535,
+          "predicted_edges_found": 6388,
+          "precision": 0.00840117311308968,
+          "recall": 0.3642999714856002,
+          "f1": 0.01642359928268876
+        }
+      },
+      "selection": {
+        "configuration_id": "support_2_confidence_0p2",
+        "parameters": {
+          "min_support": 2,
+          "min_confidence": 0.2,
+          "max_rules": 3000,
+          "max_paths_per_pivot": 10000
+        },
+        "selection_metric": "validation F1 = harmonic mean of exact-set precision and recall",
+        "validation": {
+          "known_edges": 17535,
+          "predicted_edges_found": 5391,
+          "precision": 0.010511107731542683,
+          "recall": 0.30744225834046196,
+          "f1": 0.02032724948672847
+        },
+        "tradeoff_note": "Selected by validation F1 to balance precision and recall; precision breaks F1 ties, then fewer candidates. This does not establish that unmatched candidates are false."
+      },
+      "configurations": [
+        {
+          "parameters": {
+            "min_support": 1,
+            "min_confidence": 0.1,
+            "max_rules": 3000,
+            "max_paths_per_pivot": 10000
+          },
+          "training_edges": 272115,
+          "validation_edges": 17535,
+          "learned_rules": 2753,
+          "mining": {
+            "two_hop_body_patterns": 6054,
+            "rules_before_limit": 2753,
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501
+          },
+          "prediction": {
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501,
+            "unique_candidate_edges": 760976
+          },
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 6391,
+            "precision": 0.00839842518029478,
+            "recall": 0.36447105788423156,
+            "f1": 0.016418522024736967
+          },
+          "runtime_seconds": {
+            "rule_learning": 8.102492600000915,
+            "candidate_generation_and_disk_deduplication": 41.88494409999839,
+            "total": 50.64593550000063
+          },
+          "memory": {
+            "baseline_rss_bytes": 136478720,
+            "peak_sampled_rss_bytes": 271540224,
+            "peak_sampled_rss_delta_bytes": 135061504,
+            "sampling_interval_seconds": 0.05
+          },
+          "candidate_database": "candidates.sqlite",
+          "candidate_database_bytes": 79884288,
+          "evaluation_definition": {
+            "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+            "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+            "unmatched_candidates": "unknown truth; not treated as false"
+          },
+          "configuration_id": "support_1_confidence_0p1"
+        },
+        {
+          "parameters": {
+            "min_support": 2,
+            "min_confidence": 0.1,
+            "max_rules": 3000,
+            "max_paths_per_pivot": 10000
+          },
+          "training_edges": 272115,
+          "validation_edges": 17535,
+          "learned_rules": 2384,
+          "mining": {
+            "two_hop_body_patterns": 6054,
+            "rules_before_limit": 2384,
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501
+          },
+          "prediction": {
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501,
+            "unique_candidate_edges": 760370
+          },
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 6388,
+            "precision": 0.00840117311308968,
+            "recall": 0.3642999714856002,
+            "f1": 0.01642359928268876
+          },
+          "runtime_seconds": {
+            "rule_learning": 9.915072800000416,
+            "candidate_generation_and_disk_deduplication": 50.61320370000067,
+            "total": 61.19597749999957
+          },
+          "memory": {
+            "baseline_rss_bytes": 136847360,
+            "peak_sampled_rss_bytes": 272470016,
+            "peak_sampled_rss_delta_bytes": 135622656,
+            "sampling_interval_seconds": 0.05
+          },
+          "candidate_database": "candidates.sqlite",
+          "candidate_database_bytes": 79835136,
+          "evaluation_definition": {
+            "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+            "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+            "unmatched_candidates": "unknown truth; not treated as false"
+          },
+          "configuration_id": "support_2_confidence_0p1"
+        },
+        {
+          "parameters": {
+            "min_support": 4,
+            "min_confidence": 0.1,
+            "max_rules": 3000,
+            "max_paths_per_pivot": 10000
+          },
+          "training_edges": 272115,
+          "validation_edges": 17535,
+          "learned_rules": 2059,
+          "mining": {
+            "two_hop_body_patterns": 6054,
+            "rules_before_limit": 2059,
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501
+          },
+          "prediction": {
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501,
+            "unique_candidate_edges": 758888
+          },
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 6380,
+            "precision": 0.00840703766563709,
+            "recall": 0.36384374108925005,
+            "f1": 0.016434340559205483
+          },
+          "runtime_seconds": {
+            "rule_learning": 8.168238800000836,
+            "candidate_generation_and_disk_deduplication": 51.282346699999835,
+            "total": 60.10418199999913
+          },
+          "memory": {
+            "baseline_rss_bytes": 136560640,
+            "peak_sampled_rss_bytes": 272482304,
+            "peak_sampled_rss_delta_bytes": 135921664,
+            "sampling_interval_seconds": 0.05
+          },
+          "candidate_database": "candidates.sqlite",
+          "candidate_database_bytes": 79589376,
+          "evaluation_definition": {
+            "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+            "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+            "unmatched_candidates": "unknown truth; not treated as false"
+          },
+          "configuration_id": "support_4_confidence_0p1"
+        },
+        {
+          "parameters": {
+            "min_support": 2,
+            "min_confidence": 0.05,
+            "max_rules": 3000,
+            "max_paths_per_pivot": 10000
+          },
+          "training_edges": 272115,
+          "validation_edges": 17535,
+          "learned_rules": 3000,
+          "mining": {
+            "two_hop_body_patterns": 6054,
+            "rules_before_limit": 3068,
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501
+          },
+          "prediction": {
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501,
+            "unique_candidate_edges": 1162296
+          },
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 6881,
+            "precision": 0.005920178680817967,
+            "recall": 0.39241516966067863,
+            "f1": 0.011664382441214038
+          },
+          "runtime_seconds": {
+            "rule_learning": 6.557508699999744,
+            "candidate_generation_and_disk_deduplication": 57.98348409999926,
+            "total": 65.41805989999921
+          },
+          "memory": {
+            "baseline_rss_bytes": 136556544,
+            "peak_sampled_rss_bytes": 272633856,
+            "peak_sampled_rss_delta_bytes": 136077312,
+            "sampling_interval_seconds": 0.05
+          },
+          "candidate_database": "candidates.sqlite",
+          "candidate_database_bytes": 114991104,
+          "evaluation_definition": {
+            "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+            "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+            "unmatched_candidates": "unknown truth; not treated as false"
+          },
+          "configuration_id": "support_2_confidence_0p05"
+        },
+        {
+          "parameters": {
+            "min_support": 2,
+            "min_confidence": 0.2,
+            "max_rules": 3000,
+            "max_paths_per_pivot": 10000
+          },
+          "training_edges": 272115,
+          "validation_edges": 17535,
+          "learned_rules": 1777,
+          "mining": {
+            "two_hop_body_patterns": 6054,
+            "rules_before_limit": 1777,
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501
+          },
+          "prediction": {
+            "skipped_high_degree_pivots": 138,
+            "skipped_two_hop_paths": 18055501,
+            "unique_candidate_edges": 512886
+          },
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 5391,
+            "precision": 0.010511107731542683,
+            "recall": 0.30744225834046196,
+            "f1": 0.02032724948672847
+          },
+          "runtime_seconds": {
+            "rule_learning": 7.389587199999369,
+            "candidate_generation_and_disk_deduplication": 26.660170400000425,
+            "total": 34.49953970000024
+          },
+          "memory": {
+            "baseline_rss_bytes": 136421376,
+            "peak_sampled_rss_bytes": 270774272,
+            "peak_sampled_rss_delta_bytes": 134352896,
+            "sampling_interval_seconds": 0.05
+          },
+          "candidate_database": "candidates.sqlite",
+          "candidate_database_bytes": 55631872,
+          "evaluation_definition": {
+            "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+            "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+            "unmatched_candidates": "unknown truth; not treated as false"
+          },
+          "configuration_id": "support_2_confidence_0p2"
+        }
+      ]
+    },
+    "evaluation_definition": {
+      "precision": "Unique candidate/validation exact triple matches divided by unique generated candidates.",
+      "recall": "Unique candidate/validation exact triple matches divided by unique known validation triples.",
+      "selection": "validation F1 = harmonic mean of exact-set precision and recall",
+      "unmatched_candidates": "Unknown truth; not treated as false."
+    }
+  },
+  "outputs": [
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/summary.json",
+      "sha256": "a9135e375ed8d2139249f162c47a2ea7562c8a5f98439fa627cf1e8bf6d509c8",
+      "size_bytes": 10263
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_1_confidence_0p1/metrics.json",
+      "sha256": "fa7ac194a4e6c8f789550b9d6d6b3095d1c3007ff9f5f39c63a6fe2c19e1a87e",
+      "size_bytes": 1498
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_2_confidence_0p05/metrics.json",
+      "sha256": "030c8c3b481d605cde8149d06ffe3ff247674b6e0ef58b67deaadbc1acd11672",
+      "size_bytes": 1503
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_2_confidence_0p1/metrics.json",
+      "sha256": "2c44a28a99237253147f2bc7034b4de53684760eb5989b3422f121c9dcf43d00",
+      "size_bytes": 1496
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_2_confidence_0p2/metrics.json",
+      "sha256": "fff83447b2bd2fd8e3cea43ed0eec067fd9c9c6ebb046366786fca55c15e6b48",
+      "size_bytes": 1499
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_4_confidence_0p1/metrics.json",
+      "sha256": "d1569f40b849761ec6a73ffe1a877f386c1e43ea15ae18f3d63eb11800aec0b4",
+      "size_bytes": 1499
+    }
+  ],
+  "external_outputs": [
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_1_confidence_0p1/candidates.sqlite",
+      "sha256": "dded1c5625cce2b11a65fef887edf86e8430458d19333699a4fdb11ece8ff453",
+      "size_bytes": 79884288,
+      "storage_status": "excluded_from_git_commit",
+      "reason": "Large SQLite experiment output intentionally retained outside this source commit."
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_2_confidence_0p05/candidates.sqlite",
+      "sha256": "02e575018130312e94d2a8029d0fafdf887bbf984c79dd9da038d39ccbbef3e3",
+      "size_bytes": 114991104,
+      "storage_status": "excluded_from_git_commit",
+      "reason": "Large SQLite experiment output intentionally retained outside this source commit."
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_2_confidence_0p1/candidates.sqlite",
+      "sha256": "25254908fc09a7724b180082cbda2a48f6e5cf6bdd57ba4394f1db486dfa2901",
+      "size_bytes": 79835136,
+      "storage_status": "excluded_from_git_commit",
+      "reason": "Large SQLite experiment output intentionally retained outside this source commit."
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_2_confidence_0p2/candidates.sqlite",
+      "sha256": "cbb47767604233427b5206c1cd4af64e0472f12fb8bc03563cf1d27c2e0aeb46",
+      "size_bytes": 55631872,
+      "storage_status": "excluded_from_git_commit",
+      "reason": "Large SQLite experiment output intentionally retained outside this source commit."
+    },
+    {
+      "path": "results/experiments/rule_tuning_20261021T080249887658Z/support_4_confidence_0p1/candidates.sqlite",
+      "sha256": "8a4c3d0d3ae864f95a9bac1c8475c1a73e4c7d55811ad1f4b905f9ee6444f28f",
+      "size_bytes": 79589376,
+      "storage_status": "excluded_from_git_commit",
+      "reason": "Large SQLite experiment output intentionally retained outside this source commit."
+    }
+  ]
+}

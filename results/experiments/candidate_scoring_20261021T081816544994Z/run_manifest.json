@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "experiment_type": "candidate_scoring_comparison",
+  "run_timestamp_utc": "20261021T081816544994Z",
+  "manifest_created_at_utc": "2026-10-21T12:22:26.379824+00:00",
+  "provenance_kind": "retrospective_from_saved_outputs",
+  "datasets": {
+    "identity_timing": "at_manifest_creation",
+    "splits": {
+      "train": {
+        "path": "dataset/train.txt",
+        "sha256": "6e4c2782169af21e9743f3b1d200886f5d595bf6bc504ec1351720949c5cdfae",
+        "size_bytes": 21277292,
+        "used_for_learning": true,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "valid": {
+        "path": "dataset/valid.txt",
+        "sha256": "cf6309010852f6a8d47a45df830a426415d1ee6f7a3970a8376ff1fb81db4a5c",
+        "size_bytes": 1303101,
+        "used_for_learning": false,
+        "used_for_evaluation": true,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "test": {
+        "path": "dataset/test.txt",
+        "sha256": "5711cf41623ceb4eacc50eb6108a3ca6565c7492e3caaf82a3e355cc660d1574",
+        "size_bytes": 1519499,
+        "used_for_learning": false,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      }
+    }
+  },
+  "code_version": {
+    "git_commit_observed_at_manifest_creation": "8534a405701fc7e5dff900eb766c3bc99e0a82bf",
+    "working_tree_dirty_at_manifest_creation": true,
+    "execution_version_verified": false,
+    "source_files_hashed_at_execution": [],
+    "historical_execution_version_note": "Execution-time commit, worktree state, and source hashes were not recorded; the current commit is not asserted as the version used by this historical run."
+  },
+  "configured": {
+    "rule_settings": {
+      "min_support": 2,
+      "min_confidence": 0.2,
+      "max_rules": 3000,
+      "max_paths_per_pivot": 10000
+    },
+    "candidate_generation": {
+      "max_paths_per_pivot": 10000,
+      "candidate_membership_rule": "Generate candidates from eligible training two-hop paths and learned rules; exclude training triples.",
+      "duplicate_candidates": "Deduplicated in SQLite."
+    },
+    "scoring": {
+      "baseline": "maximum supporting-rule confidence",
+      "experimental": "noisy-OR over distinct supporting rules",
+      "assumption": "Distinct rule evidence is treated as independent for scoring; related rules can violate this assumption."
+    }
+  },
+  "measured": {
+    "metrics": {
+      "learned_rules": 1777,
+      "prediction": {
+        "skipped_high_degree_pivots": 138,
+        "skipped_two_hop_paths": 18055501,
+        "unique_candidate_edges": 512886,
+        "unique_candidate_rule_evidence": 832569
+      },
+      "scoring_methods": {
+        "baseline": {
+          "name": "maximum supporting-rule confidence",
+          "description": "Maximum confidence of any learned rule supporting a candidate; preserves the current baseline scoring.",
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 5391,
+            "precision": 0.010511107731542683,
+            "recall": 0.30744225834046196
+          }
+        },
+        "experimental": {
+          "name": "noisy-OR over distinct supporting rules",
+          "description": "For each candidate, combine one confidence per unique (body relation 1, body relation 2, target relation) rule as 1 - product(1 - confidence). Repeated paths for the same rule are stored once.",
+          "assumption": "Distinct rule evidence is treated as independent for scoring; related rules can violate this assumption.",
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 5391,
+            "precision": 0.010511107731542683,
+            "recall": 0.30744225834046196
+          }
+        }
+      },
+      "score_comparison": {
+        "unique_candidates_with_score": 512886,
+        "candidates_with_changed_score": 199595,
+        "mean_score_delta_from_baseline": 0.0885106070282887
+      },
+      "runtime_seconds": 12164.6236754,
+      "memory": {
+        "baseline_rss_bytes": 136294400,
+        "peak_sampled_rss_bytes": 286842880,
+        "peak_sampled_rss_delta_bytes": 150548480,
+        "sampling_interval_seconds": 0.05
+      }
+    },
+    "evaluation_definition": {
+      "precision": "Unique candidate/validation exact triple matches divided by unique generated candidates.",
+      "recall": "Unique candidate/validation exact triple matches divided by unique known validation triples.",
+      "ranking_metrics": "No ranking improvement is claimed. The current candidate universe is an incomplete, rule-generated subset and is not a defined filtered full-ranking protocol.",
+      "unmatched_candidates": "Unknown truth; not treated as false."
+    }
+  },
+  "outputs": [
+    {
+      "path": "results/experiments/candidate_scoring_20261021T081816544994Z/metrics.json",
+      "sha256": "fb4899034d1ac405a05868448ab57f291ac62a35444d141aa08a585322e64ac2",
+      "size_bytes": 3535
+    }
+  ],
+  "external_outputs": [
+    {
+      "path": "results/experiments/candidate_scoring_20261021T081816544994Z/scoring.sqlite",
+      "sha256": "2d47e48820f7c88ab49c81b91272bc45cf42a66abfc3ffbc30b6217ccaa16d44",
+      "size_bytes": 366456832,
+      "storage_status": "excluded_from_git_commit",
+      "reason": "Large SQLite experiment output intentionally retained outside this source commit."
+    }
+  ]
+}

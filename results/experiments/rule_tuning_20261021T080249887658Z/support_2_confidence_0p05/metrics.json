@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "min_support": 2,
+    "min_confidence": 0.05,
+    "max_rules": 3000,
+    "max_paths_per_pivot": 10000
+  },
+  "training_edges": 272115,
+  "validation_edges": 17535,
+  "learned_rules": 3000,
+  "mining": {
+    "two_hop_body_patterns": 6054,
+    "rules_before_limit": 3068,
+    "skipped_high_degree_pivots": 138,
+    "skipped_two_hop_paths": 18055501
+  },
+  "prediction": {
+    "skipped_high_degree_pivots": 138,
+    "skipped_two_hop_paths": 18055501,
+    "unique_candidate_edges": 1162296
+  },
+  "validation": {
+    "known_edges": 17535,
+    "predicted_edges_found": 6881,
+    "precision": 0.005920178680817967,
+    "recall": 0.39241516966067863,
+    "f1": 0.011664382441214038
+  },
+  "runtime_seconds": {
+    "rule_learning": 6.557508699999744,
+    "candidate_generation_and_disk_deduplication": 57.98348409999926,
+    "total": 65.41805989999921
+  },
+  "memory": {
+    "baseline_rss_bytes": 136556544,
+    "peak_sampled_rss_bytes": 272633856,
+    "peak_sampled_rss_delta_bytes": 136077312,
+    "sampling_interval_seconds": 0.05
+  },
+  "candidate_database": "candidates.sqlite",
+  "candidate_database_bytes": 114991104,
+  "evaluation_definition": {
+    "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+    "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+    "unmatched_candidates": "unknown truth; not treated as false"
+  },
+  "configuration_id": "support_2_confidence_0p05"
+}

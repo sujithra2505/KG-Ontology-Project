@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_type": "test_miss_diagnostics",
+  "run_timestamp_utc": "20261021T072247757947Z",
+  "manifest_created_at_utc": "2026-10-21T12:22:27.126697+00:00",
+  "provenance_kind": "retrospective_from_saved_outputs",
+  "datasets": {
+    "identity_timing": "at_manifest_creation",
+    "splits": {
+      "train": {
+        "path": "dataset/train.txt",
+        "sha256": "6e4c2782169af21e9743f3b1d200886f5d595bf6bc504ec1351720949c5cdfae",
+        "size_bytes": 21277292,
+        "used_for_learning": true,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "valid": {
+        "path": "dataset/valid.txt",
+        "sha256": "cf6309010852f6a8d47a45df830a426415d1ee6f7a3970a8376ff1fb81db4a5c",
+        "size_bytes": 1303101,
+        "used_for_learning": false,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "test": {
+        "path": "dataset/test.txt",
+        "sha256": "5711cf41623ceb4eacc50eb6108a3ca6565c7492e3caaf82a3e355cc660d1574",
+        "size_bytes": 1519499,
+        "used_for_learning": false,
+        "used_for_evaluation": true,
+        "identity_timing": "hashed_at_manifest_creation"
+      }
+    }
+  },
+  "code_version": {
+    "git_commit_observed_at_manifest_creation": "8534a405701fc7e5dff900eb766c3bc99e0a82bf",
+    "working_tree_dirty_at_manifest_creation": true,
+    "execution_version_verified": false,
+    "source_files_hashed_at_execution": [],
+    "historical_execution_version_note": "Execution-time commit, worktree state, and source hashes were not recorded; the current commit is not asserted as the version used by this historical run."
+  },
+  "configured": {
+    "rule_settings": {
+      "min_support": 2,
+      "min_confidence": 0.1,
+      "max_rules": 3000,
+      "max_paths_per_pivot": 10000
+    },
+    "candidate_generation": {
+      "path_limit": 10000,
+      "basis": "Analyze saved prediction misses and inspect two-hop paths in the training graph."
+    },
+    "scoring": {
+      "method": "not applicable; diagnostic classification only"
+    }
+  },
+  "measured": {
+    "metrics": {
+      "missed_test_triples": 13131,
+      "diagnostic_categories": {
+        "applicable_paths_excluded_by_prediction_pivot_limit": 1346,
+        "no_qualifying_rule_even_without_path_limit": 1915,
+        "no_two_hop_training_path": 9808,
+        "rule_qualification_lost_to_pivot_limit": 62
+      },
+      "saved_artifacts_consistent": true
+    },
+    "evaluation_definition": {
+      "diagnostic_scope": "One row per missed test triple; categories are evidence classifications, not truth labels for unmatched candidates."
+    }
+  },
+  "outputs": [
+    {
+      "path": "results/diagnostics/test_miss_diagnostics_20261021T072247757947Z.csv",
+      "sha256": "d33d0cf9c7e3487a926e8e4cf31cd7f51e7782e7833bd51eebc015f0e7fc8dce",
+      "size_bytes": 9486765
+    }
+  ],
+  "external_outputs": []
+}

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "experiment_type": "path_cap_comparison",
+  "run_timestamp_utc": "20261021T073601156051Z",
+  "manifest_created_at_utc": "2026-10-21T12:22:22.218367+00:00",
+  "provenance_kind": "retrospective_from_saved_outputs",
+  "datasets": {
+    "identity_timing": "at_manifest_creation",
+    "splits": {
+      "train": {
+        "path": "dataset/train.txt",
+        "sha256": "6e4c2782169af21e9743f3b1d200886f5d595bf6bc504ec1351720949c5cdfae",
+        "size_bytes": 21277292,
+        "used_for_learning": true,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "valid": {
+        "path": "dataset/valid.txt",
+        "sha256": "cf6309010852f6a8d47a45df830a426415d1ee6f7a3970a8376ff1fb81db4a5c",
+        "size_bytes": 1303101,
+        "used_for_learning": false,
+        "used_for_evaluation": true,
+        "identity_timing": "hashed_at_manifest_creation"
+      },
+      "test": {
+        "path": "dataset/test.txt",
+        "sha256": "5711cf41623ceb4eacc50eb6108a3ca6565c7492e3caaf82a3e355cc660d1574",
+        "size_bytes": 1519499,
+        "used_for_learning": false,
+        "used_for_evaluation": false,
+        "identity_timing": "hashed_at_manifest_creation"
+      }
+    }
+  },
+  "code_version": {
+    "git_commit_observed_at_manifest_creation": "8534a405701fc7e5dff900eb766c3bc99e0a82bf",
+    "working_tree_dirty_at_manifest_creation": true,
+    "execution_version_verified": false,
+    "source_files_hashed_at_execution": [],
+    "historical_execution_version_note": "Execution-time commit, worktree state, and source hashes were not recorded; the current commit is not asserted as the version used by this historical run."
+  },
+  "configured": {
+    "rule_settings": {
+      "min_support": 2,
+      "min_confidence": 0.1,
+      "max_rules": 3000
+    },
+    "candidate_generation": {
+      "configured_path_caps": [
+        2000
+      ],
+      "path_cap_semantics": "Skip a pivot when incoming_degree * outgoing_degree exceeds the configured limit."
+    },
+    "scoring": {
+      "method": "not scored; candidate membership only"
+    }
+  },
+  "measured": {
+    "metrics": {
+      "results": [
+        {
+          "parameters": {
+            "min_support": 2,
+            "min_confidence": 0.1,
+            "max_rules": 3000,
+            "max_paths_per_pivot": 2000
+          },
+          "training_edges": 272115,
+          "validation_edges": 17535,
+          "learned_rules": 2284,
+          "mining": {
+            "two_hop_body_patterns": 5695,
+            "rules_before_limit": 2284,
+            "skipped_high_degree_pivots": 677,
+            "skipped_two_hop_paths": 20154302
+          },
+          "prediction": {
+            "skipped_high_degree_pivots": 677,
+            "skipped_two_hop_paths": 20154302,
+            "unique_candidate_edges": 481526
+          },
+          "validation": {
+            "known_edges": 17535,
+            "predicted_edges_found": 5309,
+            "precision": 0.011025365193156755,
+            "recall": 0.3027658967778728
+          },
+          "runtime_seconds": {
+            "rule_learning": 4.5681189999995695,
+            "candidate_generation_and_disk_deduplication": 20.66396309999982,
+            "total": 25.59905069999968
+          },
+          "memory": {
+            "baseline_rss_bytes": 136560640,
+            "peak_sampled_rss_bytes": 270016512,
+            "peak_sampled_rss_delta_bytes": 133455872,
+            "sampling_interval_seconds": 0.05
+          },
+          "candidate_database": "candidates.sqlite",
+          "candidate_database_bytes": 50130944,
+          "evaluation_definition": {
+            "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+            "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+            "unmatched_candidates": "unknown truth; not treated as false"
+          },
+          "configuration_id": "cap_2000"
+        }
+      ]
+    },
+    "evaluation_definition": {
+      "precision": "unique candidate/validation exact triple matches divided by unique generated candidates",
+      "recall": "unique candidate/validation exact triple matches divided by known validation triples",
+      "unmatched_candidates": "unknown truth; not treated as false"
+    }
+  },
+  "outputs": [
+    {
+      "path": "results/experiments/path_caps_20261021T073601156051Z/cap_2000/metrics.json",
+      "sha256": "1d769eda0f1e944e285a1852293ee3cb5dba694be77c0f8a061c86ee49ffb858",
+      "size_bytes": 1450
+    },
+    {
+      "path": "results/experiments/path_caps_20261021T073601156051Z/summary.json",
+      "sha256": "d246588cbd1386e909c0fe1b25198ba93c53308da5d5b8191d43799b36cf7ca0",
+      "size_bytes": 2018
+    }
+  ],
+  "external_outputs": [
+    {
+      "path": "results/experiments/path_caps_20261021T073601156051Z/cap_2000/candidates.sqlite",
+      "sha256": "6ecb150b871a322bddcc31a8764e2e9488b109839305cea8f51c65a4b95556a2",
+      "size_bytes": 50130944,
+      "storage_status": "excluded_from_git_commit",
+      "reason": "Large SQLite experiment output intentionally retained outside this source commit."
+    }
+  ]
+}
